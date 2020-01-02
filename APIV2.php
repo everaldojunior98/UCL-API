@@ -318,6 +318,7 @@
                 foreach($schedulesDOM[$i + 1]->getElementsByTagName("ul") as $periodScheduleDOM)
                 {
                     $disciplineInfo = array_map('trim', explode("Professor:", $periodScheduleDOM->getElementsByTagName("h5")[0]->textContent));
+                    $discipline->Disciplina = utf8_decode($disciplineInfo[0]);
                     $discipline->Professor = utf8_decode($disciplineInfo[1]);
                     
                     foreach(getElementsByClassName($periodScheduleDOM, 'row') as $row)
@@ -333,7 +334,7 @@
                         unset($info);
                     }
 
-                    $schedulesArray[$periods[$i]][utf8_decode($disciplineInfo[0])] = $discipline;
+                    $schedulesArray[$periods[$i]][] = $discipline;
                     unset($discipline);
                 }
             }
